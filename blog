@@ -1,0 +1,56 @@
+<?php
+
+$conn = mysqli_connect('localhost', 'root', '', 'szkola');
+
+
+
+
+
+$res = $conn->query("SELECT k.nazwa, au.imie_nazwisko, a.tytul, a.tresc from art as a inner join autorzy as au on au.id =a.autor inner join kategorie as k on k.id = a.kategoria order by a.utworzono desc");
+
+
+$arr = array();
+
+
+
+
+while($row = $res->fetch_assoc()){
+	
+array_push($arr, $row);
+}
+
+
+
+?>
+
+
+
+
+
+
+
+<html>
+
+<head>
+
+
+
+</head>
+
+<body>
+
+<?php include 'nav.php';?>
+
+<?php foreach($arr as $a):?>
+
+<div style="border:1px solid red; padding:8px; margin-bottom:16px;">
+<div style="font-size:36px;"><?php echo $a['tytul'];?></div>
+<div style="color:blue;">Autor: <?php echo $a['imie_nazwisko'];?></div>
+<div style="color:green;">Kategoria: <?php echo $a['nazwa'];?></div>
+<div style=""><?php echo $a['tresc'];?></div>
+</div>
+<?php endforeach;?>
+
+</body>
+
+</html>
