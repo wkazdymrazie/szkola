@@ -1,0 +1,26 @@
+<?php
+
+$conn = mysqli_connect('localhost', 'root', '', 'szkola');
+
+
+
+
+
+$res = $conn->query("SELECT * from uczniowie");
+
+
+$arr = array();
+
+
+while($row = $res->fetch_assoc()){
+	
+array_push($arr, $row);
+}
+
+?>
+<?php foreach($arr as $a):?>
+<div style="border:1px solid red;  padding:8px; margin-bottom:16px;">
+<div style="color:black; "><?php echo $a['Imie'];?> <?php echo $a['Nazwisko'];?> </div>
+<div style="border-top:1px solid blue;"><?php echo $a['Wiek'];?> lat</div>
+</div>
+<?php endforeach;?>
