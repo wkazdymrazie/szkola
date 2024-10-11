@@ -1,0 +1,41 @@
+// Plik index.php
+
+<form action="post.php" method="POST">
+
+<input name="imie">
+
+<input type="submit">
+
+
+</form>
+
+
+
+// plik post.php
+
+<?php
+
+$db = mysqli_connect('localhost', 'root', '', 'szkola');
+
+$imie = $_POST['imie'];
+
+$imie = str_replace("'", "", $imie);
+$imie = str_replace(";", "", $imie);
+$imie = str_replace("=", "", $imie);
+
+$sql = "SELECT * from uczniowie where Imie = '".$imie."'";
+
+
+print_r($sql);
+
+print_r("<br><br>");
+
+$res = $db->query($sql);
+
+while($row=$res->fetch_assoc()){
+	print_r($row);
+}
+
+?>
+
+
